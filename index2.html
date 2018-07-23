@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Shopping List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Shopping List</h1>
+        <form id="js-shopping-list-form">
+            <label for="shopping-list-entry">Add an item</label>
+            <input type="text" name="shopping-list-entry" class="js-shopping-list-entry" placeholder="e.g., broccoli">
+            <button type="submit">Add item</button>
+        </form>
+        <div class="additions">
+                <form id="js-show-hide">
+                    <label for="js-show-hide-label">Select</label>
+                    <select id="js-show-hide-pulldown">
+                        <option value="true">Display All</option>
+                        <option value="false">Display Checked</option>
+                    </select>
+                    </form>
+                </div>
+
+                <div class="container">
+                <form id="js-search-form">
+                    <label for="js-search-entry">Search</label>
+                    <input type="text" name="search-entry" class="js-search-entry" placeholder="Search for ...">
+                    <button class= "js-search-form-button" type="submit">Search</button>
+                </form>
+            </div>
+
+                <form role="search">
+                        <div class="search-control">
+                            <input type="search" id="js-site-search" name="q"
+                                   placeholder="Search for items..."
+                                   aria-label="Search through site content">
+                            <button id="js-search-button">Search</button>
+                        </div>
+                    </form>
+
+
+
+        <ul class="shopping-list js-shopping-list">
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
