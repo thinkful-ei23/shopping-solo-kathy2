@@ -154,9 +154,11 @@ function useInputShowHide () {
 
 //+++++++++++++++++++++++++++++++
 function showSearchItems(searchTerm) {
-  console.log(`'inside showSearchItems' ${searchTerm}`);
+  //console.log(`'inside showSearchItems' ${searchTerm}`);
   STORE.items = STORE.items.filter(function (item) {
-    return item.name === searchTerm;
+    console.log(`new searched for item ${item.name}`);
+    console.log(`this is the search term ${searchTerm}`);
+    return item.name.startsWith(searchTerm) ;
   });
 }
 
@@ -165,6 +167,7 @@ function handleSearchButton() {
     event.preventDefault();
     //console.log('I\'m inside handleSearchButton');
     const searchTerm = $('.js-search-entry').val().toLowerCase();
+    //console.log(searchTerm);
     $('.js-search-entry').val('');
     showSearchItems(searchTerm);
 
@@ -183,6 +186,7 @@ function editItems() {
   return;
 }
 
+// isEdited
 //  html()
 
 //  let getText = $('.js-shopping-item').on('mouseover', function (event){
@@ -191,25 +195,25 @@ function editItems() {
 
 /*
 function getEditTextItems() {
-  //get info from DOM
-  //event listen for mouseover on item
-  //change the item from span to text box .html();
-  //capture text from edit to save in store? or separate variable?
-  //.mouseout or .mouseleave to return text to span with changed
-  //change store
-  //
-  //render list
-  // will need to render entire ul with changed text
+  get info from DOM
+  event listen for mouseover on item
+  change the item from span to text box .html();
+  capture text from edit to save in store? or separate variable?
+  .mouseout or .mouseleave to return text to span with changed
+  change store
+
+  render list
+  will need to render entire ul with changed text
 
   l
 
   });
 
-  // function handleGetEdit(getEditTextItems) {
+  function handleGetEdit(getEditTextItems) {
 
   // }
 
-  */
+
 /*
 <li class="js-item-index-element" data-item-index="${itemIndex}">
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
@@ -234,7 +238,6 @@ function handleShoppingList() {
   useInputShowHide();
 
   handleSearchButton();
-  showSearchItems();
   editItems();
 
   //getSearchButtonText();
