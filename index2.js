@@ -15,10 +15,10 @@
 // something to see when the page first loads.
 const STORE = {
   items: [
-    { name: 'apples', checked: false },
-    { name: 'oranges', checked: false },
-    { name: 'milk', checked: true },
-    { name: 'bread', checked: false }
+    { id : 24, name: 'apples', checked: false },
+    { id : 23, name: 'oranges', checked: false },
+    {id : 22,  name: 'milk', checked: true },
+    {id : 21,  name: 'bread', checked: false }
   ],
   displayStatus: true,
   searchText: 'null',
@@ -39,29 +39,28 @@ function generateItemElement(item, itemIndex, template) {
       </div>
     </li>`;
 }
-
 //+++++++++++++++++++++++++++++++
 function generateShoppingItemsString(shoppingList) {
   console.log('Generating shopping list element');
   const items = shoppingList.map((item, index) => generateItemElement(item, index));
   return items.join('');
 }
-
 //+++++++++++++++++++++++++++++++
 function renderShoppingList() {
   // this function will be responsible for rendering the shopping list in
   // the DOM
   console.log('`renderShoppingList` ran');
   let storeName = STORE.items;
-  if(STORE.displayStatus === false) {
-    storeName = storeName.filter(item =>  item.checked);  }
-  if(STORE.searchTerm === 'string') {
-    storeName = storeName.filter(item =>  item.name);  }
+  if (STORE.displayStatus === false) {
+    storeName = storeName.filter(item => item.checked);
+  }
+  if (STORE.searchTerm === 'string') {
+    storeName = storeName.filter(item => item.name);
+  }
 
   const shoppingListItemsString = generateShoppingItemsString(storeName);
   $('.js-shopping-list').html(shoppingListItemsString);
 }
-
 //+++++++++++++++++++++++++++++++
 function addItemToShoppingList(itemName) {
   console.log(`Adding "${itemName}" to shopping list`);
@@ -127,7 +126,7 @@ function handleDeleteItemClicked() {
 }
 //+++++++++++++++++++++++++++++++
 
-function useInputShowHide () {
+function useInputShowHide() {
   console.log('I\'m inside function useInputShowHide');
   //get info from DOM    //listen for select
   $('#js-show-hide-pulldown').on('change', e => {
@@ -135,7 +134,7 @@ function useInputShowHide () {
     const showHideValue = $(e.target).val();
     //console.log(showHideValue );
     //change store
-    if(showHideValue === 'true') {
+    if (showHideValue === 'true') {
       STORE.displayStatus = true;
     } else {
       STORE.displayStatus = false;
@@ -144,24 +143,15 @@ function useInputShowHide () {
     renderShoppingList();
   });
 }
-
-//+++++++++++++++++++++++++++++++
-
-// function getSearchButtonText() {
-//   console.log('I\'m inside getSearchButtonText');
-//   const searchTerm = $('#js-site-search').text().toLowerCase();
-// }
-
 //+++++++++++++++++++++++++++++++
 function showSearchItems(searchTerm) {
   //console.log(`'inside showSearchItems' ${searchTerm}`);
   STORE.items = STORE.items.filter(function (item) {
     console.log(`new searched for item ${item.name}`);
     console.log(`this is the search term ${searchTerm}`);
-    return item.name.startsWith(searchTerm) ;
+    return item.name.startsWith(searchTerm);
   });
 }
-
 function handleSearchButton() {
   $('#js-search-form').on('submit', function (event) {
     event.preventDefault();
@@ -175,58 +165,32 @@ function handleSearchButton() {
   });
 }
 //+++++++++++++++++++++++++++++++
+/*
 function editItems() {
   //get info from DOM    //listen for select
-  $('.js-shopping-item').click(function () {
-    $('span.js-shopping-item').html(
-      '<input type="text" ></input>');
-    $(this).text();
-
-  });
-  return;
+  console.log(`checking property for attribute contenteditable ${itemIndex} `);
+  STORE.items[itemIndex].contenteditable = !STORE.items[itemIndex].contenteditable;
 }
+function handleEditItems() {
+//get
+  $('.js-shopping-list').on('submit', '.js-shopping-item' event => {
+    event.preventDefault();
+    const itemIndex = getItemIndexFromElement(event.currentTarget);
+    const itemName = $(event.currentTarget).find('.js-shopping-item' ).val();
+    store.find
+    .closest('.js-shopping-item')
+      .attr('contenteditable', true);
+  })
+  //set
+  $('.js-shopping-list').on('mouseout', function () {
+    $(item.name)
+      .closest('.js-shopping-item')
+      .attr('contenteditable', false);
 
-// isEdited
-//  html()
-
-//  let getText = $('.js-shopping-item').on('mouseover', function (event){
-//   getText = $('.js-shopping-item').html();
-
-
-/*
-function getEditTextItems() {
-  get info from DOM
-  event listen for mouseover on item
-  change the item from span to text box .html();
-  capture text from edit to save in store? or separate variable?
-  .mouseout or .mouseleave to return text to span with changed
-  change store
-
-  render list
-  will need to render entire ul with changed text
-
-  l
-
-  });
-
-  function handleGetEdit(getEditTextItems) {
-
-  // }
-
-
-/*
-<li class="js-item-index-element" data-item-index="${itemIndex}">
-      <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
-      <div class="shopping-item-controls">
-        <button class="shopping-item-toggle js-item-toggle">
-            <span class="button-label">check</span>
-        </button>
-        <button class="shopping-item-delete js-item-delete">
-            <span class="button-label">delete</span>
-        </button>
-      </div>
-    </li>`;
-    */
+  renderShoppingList();
+});
+}
+*/
 //+++++++++++++++++++++++++++++++
 // this function will be responsible for rendering the shopping list in
 // the DOM
@@ -238,11 +202,30 @@ function handleShoppingList() {
   useInputShowHide();
 
   handleSearchButton();
-  editItems();
-
-  //getSearchButtonText();
-
+  //handleEditItems();
 }
 
 // when the page loads, call `handleShoppingList`
 $(handleShoppingList);
+
+
+/*
+function editItems(index, name) {
+  //get info from DOM    //listen for select
+  console.log('checking property for attribute contenteditable ');
+  const item = STORE.items.find(item => item.id === id) ;
+  item.name = name;
+  console.log(item);
+}
+console.log(editItems('apple'));
+
+function handleEditItems() {
+  $('.js-shopping-list').on('submit', function (event) {
+    event.preventDefault;
+    const itemId = getItemIndexFromElement(event.currentTarget);
+    toggleCheckedForListItem(itemId) ;
+
+  renderShoppingList();
+});
+}
+*/
